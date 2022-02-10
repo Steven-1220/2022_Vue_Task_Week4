@@ -1,3 +1,5 @@
+let delProductModal = {};
+
 export default {
     data() {
         return {
@@ -14,11 +16,25 @@ export default {
             axios.delete(`${this.url}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`)
                 .then(res => {
                     this.$emit('get-products')
-                    delProductModal.hide();
+                    //  delProductModal.hide(); 改成 this.close()
+                    this.close();
                 })
                 .catch(err => {
                     console.log(err.data);
                 })
         },
+        open() {
+            delProductModal.show();
+        },
+        close() {
+            delProductModal.hide();
+        }
+    },
+    mounted() {
+        // 使用 new 建立 bootstrap Modal，拿到實體 DOM 並賦予到變數上
+        delProductModal = new bootstrap.Modal(document.getElementById('delProductModal'), {
+            keyboard: false,
+            backdrop: 'static'
+        })
     },
 }

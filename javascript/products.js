@@ -3,9 +3,6 @@ import pagination from './components/pagination.js';
 import productModalTemp from './components/productModal.js';
 import delProductModalTemp from './components/delProductModal.js'
 
-let productModal = {};
-let delProductModal = {};
-
 
 const app = createApp({
 
@@ -67,15 +64,16 @@ const app = createApp({
                 this.tempProduct = {
                     imagesUrl: []
                 }
-                productModal.show();
+                // 呼叫 ref='productModalRef' 這個 DOM 元素的 open 函式
+                this.$refs.productModalRef.open();
                 this.isNew = true;
             } else if (state == 'edit') {
                 this.tempProduct = { ...item };
-                productModal.show();
+                this.$refs.productModalRef.open();
                 this.isNew = false;
             } else if (state == 'delete') {
                 this.tempProduct = { ...item };
-                delProductModal.show();
+                this.$refs.delProductModalRef.open();
             }
         },
 
@@ -83,16 +81,7 @@ const app = createApp({
     //生命週期
     mounted() {
         this.checkLogin();
-        // 使用 new 建立 bootstrap Modal，拿到實體 DOM 並賦予到變數上
-        productModal = new bootstrap.Modal(document.getElementById('productModal'), {
-            keyboard: false,
-            backdrop: 'static'
-        })
 
-        delProductModal = new bootstrap.Modal(document.getElementById('delProductModal'), {
-            keyboard: false,
-            backdrop: 'static'
-        })
     },
 
 

@@ -1,3 +1,5 @@
+let productModal = {};
+
 export default {
     data() {
         return {
@@ -24,7 +26,8 @@ export default {
                 .then(res => {
                     // console.log(res.data);
                     this.$emit('get-products');
-                    productModal.hide();
+                    //  productModal.hide(); 改成 this.close()
+                    this.close();
                 })
                 .catch(err => {
                     alert(err.data.message);
@@ -52,7 +55,22 @@ export default {
                 .catch(err => {
                     console.log(err.response);
                 })
+        },
+
+        open() {
+            productModal.show();
+        },
+        close() {
+            productModal.hide();
         }
+    },
+
+    mounted() {
+        // 使用 new 建立 bootstrap Modal，拿到實體 DOM 並賦予到變數上
+        productModal = new bootstrap.Modal(document.getElementById('productModal'), {
+            keyboard: false,
+            backdrop: 'static'
+        })
     },
 
 
