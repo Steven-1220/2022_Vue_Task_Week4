@@ -1,10 +1,10 @@
-let productModal = {};
 
 export default {
     data() {
         return {
             url: 'https://vue3-course-api.hexschool.io/v2',
             apiPath: 'steven1220',
+            productModal: {},
         }
     },
     props: ['tempProduct', 'isNew'],
@@ -58,16 +58,16 @@ export default {
         },
 
         open() {
-            productModal.show();
+            this.productModal.show();
         },
         close() {
-            productModal.hide();
+            this.productModal.hide();
         }
     },
 
     mounted() {
         // 使用 new 建立 bootstrap Modal，拿到實體 DOM 並賦予到變數上
-        productModal = new bootstrap.Modal(document.getElementById('productModal'), {
+        this.productModal = new bootstrap.Modal(document.getElementById('productModal'), {
             keyboard: false,
             backdrop: 'static'
         })

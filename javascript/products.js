@@ -42,6 +42,7 @@ const app = createApp({
 
         },
         getAllProducts(page = 1) {
+            // query 屬於參數(API 文件)，會以 ? 為開頭，問號後方代表 query
             axios.get(`${this.url}/api/${this.apiPath}/admin/products/?page=${page}`)
                 .then(res => {
                     // console.log(res.data);
@@ -68,11 +69,13 @@ const app = createApp({
                 this.$refs.productModalRef.open();
                 this.isNew = true;
             } else if (state == 'edit') {
-                this.tempProduct = { ...item };
+                // 使用深拷貝
+                this.tempProduct = JSON.parse(JSON.stringify(item));
                 this.$refs.productModalRef.open();
                 this.isNew = false;
             } else if (state == 'delete') {
-                this.tempProduct = { ...item };
+                // 使用深拷貝
+                this.tempProduct = JSON.parse(JSON.stringify(item));
                 this.$refs.delProductModalRef.open();
             }
         },
